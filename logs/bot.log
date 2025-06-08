@@ -1,0 +1,42 @@
+2025-06-08 13:33:33 | INFO | __main__:main:51 | Starting Telegram bot...
+2025-06-08 13:33:33 | ERROR | app.database.database:init_db:51 | Error initializing database: connect() got an unexpected keyword argument 'sslmode'
+2025-06-08 13:33:33 | ERROR | __main__:<module>:113 | Critical error: connect() got an unexpected keyword argument 'sslmode'
+2025-06-08 13:33:49 | INFO | __main__:main:51 | Starting Telegram bot...
+2025-06-08 13:33:49 | ERROR | app.database.database:init_db:55 | Error initializing database: `sslmode` parameter must be one of: disable, allow, prefer, require, verify-ca, verify-full
+2025-06-08 13:33:49 | ERROR | __main__:<module>:113 | Critical error: `sslmode` parameter must be one of: disable, allow, prefer, require, verify-ca, verify-full
+2025-06-08 13:34:02 | INFO | __main__:main:51 | Starting Telegram bot...
+2025-06-08 13:34:07 | INFO | app.database.database:init_db:54 | Database tables created successfully
+2025-06-08 13:34:08 | INFO | __main__:main:55 | Database initialized
+2025-06-08 13:34:08 | INFO | app.services.scheduler:_add_scheduled_jobs:123 | Scheduled jobs added successfully
+2025-06-08 13:34:08 | INFO | app.services.scheduler:start:46 | Notification scheduler started successfully
+2025-06-08 13:34:08 | INFO | __main__:main:89 | Notification scheduler started
+2025-06-08 13:34:08 | INFO | __main__:main:93 | Bot started successfully
+2025-06-08 13:34:30 | INFO | app.services.scheduler:stop:63 | Notification scheduler stopped
+2025-06-08 13:34:30 | INFO | __main__:main:101 | Bot stopped
+2025-06-08 13:34:34 | INFO | __main__:main:52 | Starting Telegram bot...
+2025-06-08 13:34:36 | INFO | app.database.database:init_db:54 | Database tables created successfully
+2025-06-08 13:34:36 | INFO | __main__:main:56 | Database initialized
+2025-06-08 13:34:36 | WARNING | __main__:main:66 | Redis not available (Error Multiple exceptions: [Errno 111] Connect call failed ('127.0.0.1', 6379), [Errno 99] Cannot assign requested address connecting to localhost:6379.), using memory storage for FSM
+2025-06-08 13:34:36 | INFO | app.services.scheduler:_add_scheduled_jobs:123 | Scheduled jobs added successfully
+2025-06-08 13:34:36 | INFO | app.services.scheduler:start:46 | Notification scheduler started successfully
+2025-06-08 13:34:36 | INFO | __main__:main:98 | Notification scheduler started
+2025-06-08 13:34:36 | INFO | __main__:main:102 | Bot started successfully
+2025-06-08 13:34:52 | INFO | app.services.scheduler:stop:63 | Notification scheduler stopped
+2025-06-08 13:34:52 | INFO | __main__:main:111 | Bot stopped
+2025-06-08 13:34:56 | INFO | __main__:main:52 | Starting Telegram bot...
+2025-06-08 13:34:58 | INFO | app.database.database:init_db:54 | Database tables created successfully
+2025-06-08 13:34:58 | INFO | __main__:main:56 | Database initialized
+2025-06-08 13:34:58 | WARNING | __main__:main:66 | Redis not available (Error Multiple exceptions: [Errno 111] Connect call failed ('127.0.0.1', 6379), [Errno 99] Cannot assign requested address connecting to localhost:6379.), using memory storage for FSM
+2025-06-08 13:34:58 | INFO | app.services.scheduler:_add_scheduled_jobs:123 | Scheduled jobs added successfully
+2025-06-08 13:34:58 | INFO | app.services.scheduler:start:46 | Notification scheduler started successfully
+2025-06-08 13:34:58 | INFO | __main__:main:98 | Notification scheduler started
+2025-06-08 13:34:58 | INFO | __main__:main:102 | Bot started successfully
+2025-06-08 13:35:24 | ERROR | app.middlewares.auth:__call__:45 | Error in auth middleware: Could not determine join condition between parent/child tables on relationship User.group - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+2025-06-08 13:35:24 | INFO | app.middlewares.logging:__call__:61 | Incoming Message
+2025-06-08 13:35:24 | ERROR | app.handlers.common:unknown_message:214 | Error handling unknown message: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(users)]'. Original exception was: Could not determine join condition between parent/child tables on relationship User.group - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+2025-06-08 13:35:24 | INFO | app.middlewares.logging:__call__:79 | Processed Message successfully
+2025-06-08 13:35:29 | ERROR | app.middlewares.auth:__call__:45 | Error in auth middleware: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(users)]'. Original exception was: Could not determine join condition between parent/child tables on relationship User.group - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+2025-06-08 13:35:29 | INFO | app.middlewares.logging:__call__:61 | Incoming Message
+2025-06-08 13:35:29 | ERROR | app.middlewares.logging:__call__:96 | Error processing Message: Telegram server says - Bad Request: can't parse entities: Unsupported start tag "код" at byte offset 1322
+2025-06-08 13:36:43 | INFO | app.services.scheduler:stop:63 | Notification scheduler stopped
+2025-06-08 13:36:43 | INFO | __main__:main:111 | Bot stopped
