@@ -12,6 +12,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.redis import RedisStorage
+from aiogram.fsm.storage.memory import MemoryStorage
 from loguru import logger
 import redis.asyncio as redis
 
@@ -54,9 +55,17 @@ async def main() -> None:
     await init_db()
     logger.info("Database initialized")
     
-    # Initialize Redis storage for FSM
-    redis_client = redis.from_url(settings.REDIS_URL)
-    storage = RedisStorage(redis_client)
+    # Initialize storage for FSM (fallback to memory if Redis unavailable)
+    try:
+        redis_client = redis.from_url(settings.REDIS_URL)
+        # Test Redis connection
+        await redis_client.ping()
+        storage = RedisStorage(redis_client)
+        logger.info("Using Redis storage for FSM")
+    except Exception as e:
+        logger.warning(f"Redis not available ({e}), using memory storage for FSM")
+        storage = MemoryStorage()
+        redis_client = None
     
     # Initialize bot and dispatcher
     bot = Bot(
@@ -97,7 +106,8 @@ async def main() -> None:
     finally:
         await scheduler.stop()
         await bot.session.close()
-        await redis_client.close()
+        if redis_client:
+            await redis_client.close()
         logger.info("Bot stopped")
 
 
