@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # Redis for FSM storage and caching
+  redis:
+    image: redis:7-alpine
+    container_name: telegram_bot_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 3s
+      retries: 5
+    networks:
+      - telegram_bot_network
+
+  # PostgreSQL Database (optional - you can use external DB)
+  postgres:
+    image: postgres:15-alpine
+    container_name: telegram_bot_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: telegram_bot
+      POSTGRES_USER: telegram_user
+      POSTGRES_PASSWORD: telegram_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U telegram_user -d telegram_bot"]
+      timeout: 5s
+      retries: 5
+    networks:
+      - telegram_bot_network
+
+  # Adminer for database management (optional)
+  adminer:
+    image: adminer:latest
+    container_name: telegram_bot_adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      - postgres
+    networks:
+      - telegram_bot_network
+
+volumes:
+  redis_data:
+    driver: local
+  postgres_data:
+    driver: local
+
+networks:
+  telegram_bot_network:
+    driver: bridge

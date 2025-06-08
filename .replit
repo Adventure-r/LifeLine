@@ -1,0 +1,41 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["cargo", "freetype", "lcms2", "libiconv", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "openssl", "pkg-config", "postgresql", "rustc", "tcl", "tk", "zlib"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Telegram Bot Server"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "install_deps"
+
+[[workflows.workflow]]
+name = "Telegram Bot Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install -r requirements.txt && python app/main.py"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "install_deps"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install aiogram==3.13.1 asyncpg==0.29.0 sqlalchemy==2.0.35 alembic==1.13.3 pydantic==2.9.2 python-dotenv==1.0.1 redis==5.1.1 aioredis==2.0.1 loguru==0.7.2 typing-extensions==4.12.2 python-dateutil==2.9.0 pytz==2024.2 cryptography==43.0.1 pillow==10.4.0 aiofiles==24.1.0 APScheduler==3.10.4 && echo \"Dependencies installed successfully\""
+
+[deployment]
+run = ["sh", "-c", "pip install -r requirements.txt && python app/main.py"]
