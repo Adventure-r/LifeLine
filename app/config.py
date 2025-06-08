@@ -4,7 +4,8 @@ Configuration settings for the bot
 
 import os
 from typing import List
-from pydantic import BaseSettings, validator
+from pydantic import field_validator
+from pydantic_settings import BaseSettings
 from datetime import timezone
 import pytz
 
@@ -42,7 +43,8 @@ class Settings(BaseSettings):
     NOTIFICATION_CHECK_INTERVAL: int = int(os.getenv("NOTIFICATION_CHECK_INTERVAL", "3600"))  # seconds
     DEADLINE_REMINDER_DAYS: List[int] = [7, 3, 1]  # Days before deadline to send reminders
     
-    @validator('ADMIN_CODES')
+    @field_validator('ADMIN_CODES')
+    @classmethod
     def parse_admin_codes(cls, v):
         """Parse admin codes from comma-separated string"""
         return [code.strip() for code in v.split(',') if code.strip()]
@@ -52,9 +54,10 @@ class Settings(BaseSettings):
         """Get timezone object"""
         return pytz.timezone(self.TIMEZONE)
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    model_config = {
+        "env_file": ".env",
+        "case_sensitive": True
+    }
 
 
 # Global settings instance

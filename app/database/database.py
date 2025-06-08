@@ -10,9 +10,16 @@ from loguru import logger
 from app.config import settings
 from app.database.models import Base
 
-# Create async engine
+# Create async engine with proper asyncpg URL
+database_url = settings.DATABASE_URL
+if not database_url.startswith("postgresql+asyncpg://"):
+    if database_url.startswith("postgresql://"):
+        database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    elif database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql+asyncpg://", 1)
+
 engine = create_async_engine(
-    settings.DATABASE_URL,
+    database_url,
     poolclass=NullPool,
     echo=False,  # Set to True for SQL query logging
     future=True
